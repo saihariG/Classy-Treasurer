@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dashboard"
+        android:icon="@drawable/dashboard"
+        android:title="@string/dashboard" />
+
+    <item
+        android:id="@+id/income"
+        android:icon="@drawable/income"
+        android:title="@string/income" />
+
+    <item
+        android:id="@+id/expense"
+        android:icon="@drawable/expense"
+        android:title="@string/expense" />
+
+    <item
+        android:id="@+id/FinancialTip"
+        android:icon="@drawable/financialtip"
+        android:title="@string/get_financial_tip_as_reward" />
+
+    <item
+        android:id="@+id/investor"
+        android:icon="@drawable/invest"
+        android:title="@string/be_an_investor" />
+
+    <item
+        android:id="@+id/developer_info"
+        android:icon="@drawable/developer"
+        android:title="@string/contact_developer" />
+
+    <item
+        android:id="@+id/request"
+        android:icon="@drawable/requestfeature"
+        android:title="@string/request_a_feature" />
+
+    <item
+        android:id="@+id/logout_id"
+        android:icon="@drawable/logout"
+        android:title="@string/log_out" />
+
+
+</menu>

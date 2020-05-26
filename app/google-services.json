@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "677185516464",
+    "firebase_url": "https://classy-treasurer.firebaseio.com",
+    "project_id": "classy-treasurer",
+    "storage_bucket": "classy-treasurer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677185516464:android:741b5753b60cd27cb6dc75",
+        "android_client_info": {
+          "package_name": "com.classyinc.classytreasurer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677185516464-s89rvlk3vas4plo8mmkaikin1d7l7e8k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.classyinc.classytreasurer",
+            "certificate_hash": "9c932936d2b696202ab0fbbbfe2f45bf491ab72a"
+          }
+        },
+        {
+          "client_id": "677185516464-ntga5uipf4lqkdv4uqtjosd7cek76alp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvhrZ615V2GnWWUXaNiTiugyhHRbkYMsA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677185516464-ntga5uipf4lqkdv4uqtjosd7cek76alp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
