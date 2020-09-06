@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".RegistrationActivity"
+    tools:context=".activities.RegistrationActivity"
     android:background="@drawable/background_color">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
+        android:gravity="center"
         android:orientation="vertical"
         android:layout_gravity="center"
         >
@@ -31,7 +31,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:textSize="25sp"
-            />
+            android:fontFamily="@font/ubuntu_bold"/>
 
         <EditText
             android:id="@+id/email_reg_id"
@@ -45,9 +45,9 @@
             android:drawablePadding="10dp"
             android:layout_marginTop="35dp"
             android:background="@drawable/edit"
-            android:padding="20dp"
+            android:padding="15dp"
             android:elevation="10dp"
-            />
+            android:fontFamily="@font/ubuntu_regular"/>
 
 
         <EditText
@@ -62,9 +62,9 @@
             android:drawablePadding="10dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/edit"
-            android:padding="20dp"
+            android:padding="15dp"
             android:elevation="10dp"
-            />
+            android:fontFamily="@font/ubuntu_regular"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -72,7 +72,7 @@
             android:text="@string/log_in"
             android:id="@+id/txt_signinlayout_id"
             android:textColor="#2CA7E0"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/ubuntu_regular"
             android:layout_gravity="end"
             android:layout_marginTop="20dp"
             android:textSize="20sp"
@@ -89,7 +89,7 @@
             android:background="@drawable/button"
             android:id="@+id/btn_reg_id"
             android:elevation="10dp"
-            />
+            android:fontFamily="@font/ubuntu_bold"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -100,7 +100,7 @@
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="#2CA7E0"
             android:textStyle="bold"
-            />
+            android:fontFamily="@font/ubuntu_bold"/>
 
 
     </LinearLayout>

@@ -10,7 +10,14 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
+
         <item name="drawerArrowStyle">@style/DrawerIconStyle</item>
+
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <item name="android:fontFamily">@font/ubuntu_bold</item>
 
     </style>
 

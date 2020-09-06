@@ -1,4 +1,4 @@
-package com.classyinc.classytreasurer;
+package com.classyinc.classytreasurer.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.classyinc.classytreasurer.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -60,16 +61,17 @@ public class MainActivity extends AppCompatActivity {
                 String pass = mPass.getText().toString().trim();
 
                 if(TextUtils.isEmpty(email)) {
-                    mEmail.setError("Email Required...!");
+
+                    mEmail.setError("Email Required");
                     return;
                 }
 
                 if(TextUtils.isEmpty(pass)) {
-                    mPass.setError("Password Required...!");
+                    mPass.setError("Password Required");
                     return;
                 }
 
-                mDialog.setMessage("Logging In...!");
+                mDialog.setMessage("Logging In...");
                 mDialog.show();
 
                 mAuth.signInWithEmailAndPassword(email,pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
                             mDialog.dismiss();
                             startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-                            Toast.makeText(MainActivity.this, "Login Successfull...!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
                     }
                 })

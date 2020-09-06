@@ -22,6 +22,7 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="@string/update_your_expense_info"
+                android:fontFamily="@font/ubuntu_bold"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@android:color/white" />
 
@@ -41,7 +42,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/amount" />
+                        android:text="@string/amount"
+                        android:fontFamily="@font/ubuntu_regular"/>
 
 
                 </RelativeLayout>
@@ -57,7 +59,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:maxLength="6" />
+                        android:maxLength="6"
+                        android:fontFamily="@font/ubuntu_medium"/>
 
                 </RelativeLayout>
 
@@ -79,7 +82,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SPENT FOR:" />
+                        android:text="SPENT FOR:"
+                        android:fontFamily="@font/ubuntu_regular"/>
 
 
                 </RelativeLayout>
@@ -94,7 +98,8 @@
                         android:id="@+id/edt_type_update_expense_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLength="18" />
+                        android:maxLength="18"
+                        android:fontFamily="@font/ubuntu_medium"/>
 
 
                 </RelativeLayout>
@@ -118,7 +123,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/note" />
+                        android:text="@string/note"
+                        android:fontFamily="@font/ubuntu_regular"/>
 
 
                 </RelativeLayout>
@@ -133,7 +139,9 @@
                         android:id="@+id/edt_note_update_expense_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLength="50" />
+                        android:maxLength="50"
+                        android:fontFamily="@font/ubuntu_medium"
+                        />
 
 
                 </RelativeLayout>
@@ -159,7 +167,8 @@
                         android:background="@drawable/btndesign"
                         android:text="@string/delete"
                         android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:fontFamily="@font/ubuntu_bold"/>
 
                 </RelativeLayout>
 
@@ -177,7 +186,8 @@
                         android:background="@drawable/textdesign"
                         android:text="@string/update"
                         android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:fontFamily="@font/ubuntu_bold"/>
 
                 </RelativeLayout>
 

@@ -1,4 +1,4 @@
-package com.classyinc.classytreasurer;
+package com.classyinc.classytreasurer.adapters;
 
 
 import android.content.Context;
@@ -15,7 +15,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-
+import com.classyinc.classytreasurer.R;
 
 import java.util.ArrayList;
 
@@ -46,7 +46,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         }
     }
 
-    SearchAdapter(Context context, ArrayList<String> mdateList, ArrayList<String> mtimeList, ArrayList<String> mtitleList, ArrayList<String> mnoteList, ArrayList<String> mamountList) {
+    public SearchAdapter(Context context, ArrayList<String> mdateList, ArrayList<String> mtimeList, ArrayList<String> mtitleList, ArrayList<String> mnoteList, ArrayList<String> mamountList) {
         this.context = context;
 
         this.mdateList = mdateList;

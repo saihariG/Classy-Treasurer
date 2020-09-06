@@ -1,8 +1,10 @@
-package com.classyinc.classytreasurer;
+package com.classyinc.classytreasurer.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.classyinc.classytreasurer.Model.reqFeature;
+import com.classyinc.classytreasurer.R;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -30,17 +33,22 @@ public class RequestFeature extends AppCompatActivity {
 
     private DatabaseReference mReqFeatureDatabseRefer;
 
-
+    Context context;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_feature);
 
-        MobileAds.initialize(RequestFeature.this,"ca-app-pub-6826247666109501~7454811121");
+        Toolbar toolbar = findViewById(R.id.tool_req_id);
+        toolbar.setTitle("Request a Feature");
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        final InterstitialAd interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId("ca-app-pub-6826247666109501/7893246085");
+        MobileAds.initialize(context,"ca-app-pub-4710955483788759~6292166403");
+
+        final InterstitialAd interstitialAd = new InterstitialAd(context);
+        interstitialAd.setAdUnitId("ca-app-pub-4710955483788759/7244664731");
         interstitialAd.loadAd(new AdRequest.Builder().build());
 
         interstitialAd.setAdListener(new AdListener(){
@@ -50,22 +58,22 @@ public class RequestFeature extends AppCompatActivity {
                     interstitialAd.show();
                 }
             }
-            @Override
+         /*  @Override
             public void onAdFailedToLoad(int errorCode){
                 if (errorCode == AdRequest.ERROR_CODE_INTERNAL_ERROR) {
-                    Toast.makeText(RequestFeature.this, "Internal error!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RequestFeature.this, errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_INVALID_REQUEST) {
-                    Toast.makeText(RequestFeature.this, "Invalid Ad Request!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RequestFeature.this, errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_NETWORK_ERROR){
-                    Toast.makeText(RequestFeature.this, "Please Check your Internet Connection!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RequestFeature.this, errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_NO_FILL){
-                    Toast.makeText(RequestFeature.this, "Lack of Ads in Inventory!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RequestFeature.this, errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_APP_ID_MISSING){
-                    Toast.makeText(RequestFeature.this, "App Id Missing!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RequestFeature.this, errorCode, Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -76,7 +84,7 @@ public class RequestFeature extends AppCompatActivity {
             public void onAdClosed() {
 
 
-            }
+            } */
 
         });
 
@@ -96,7 +104,7 @@ public class RequestFeature extends AppCompatActivity {
                 String mReq = edtreq.getText().toString();
 
                 if (TextUtils.isEmpty(mReq)) {
-                    edtreq.setError("Field Empty...!");
+                    edtreq.setError("Field Empty");
                 }
 
                 if (!TextUtils.isEmpty(mReq)) {
@@ -105,8 +113,27 @@ public class RequestFeature extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
 
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+        overridePendingTransition(R.anim.fui_slide_in_right,R.anim.fui_slide_out_left);
+    }
+
 
     private void requestFeature() {
 
@@ -130,14 +157,11 @@ public class RequestFeature extends AppCompatActivity {
         assert id != null;
         mReqFeatureDatabseRefer.child(id).setValue(reqFeature);
 
-        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+        startActivity(new Intent(context ,HomeActivity.class));
 
-        Toast.makeText(getApplicationContext(), "Your Request Have Been Saved.Our Team Will Contact you Shortly!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context , "Your Request Have Been Saved.Our Team Will Contact you Shortly", Toast.LENGTH_SHORT).show();
 
     }
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-    }
+
 }

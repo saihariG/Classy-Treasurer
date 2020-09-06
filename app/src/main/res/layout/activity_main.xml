@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".activities.MainActivity"
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/background_color">
@@ -12,9 +12,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
         android:orientation="vertical"
         android:layout_gravity="center"
+        android:gravity="center"
         >
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -32,7 +32,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:textSize="25sp"
-            />
+            android:fontFamily="@font/ubuntu_bold"/>
 
         <EditText
             android:id="@+id/email_login_id"
@@ -46,8 +46,9 @@
             android:drawablePadding="10dp"
             android:layout_marginTop="35dp"
             android:background="@drawable/edit"
-            android:padding="20dp"
-            android:elevation="10dp"/>
+            android:padding="15dp"
+            android:elevation="15dp"
+            android:fontFamily="@font/ubuntu_regular"/>
 
 
         <EditText
@@ -62,21 +63,23 @@
             android:drawablePadding="10dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/edit"
-            android:padding="20dp"
-            android:elevation="10dp"/>
+            android:padding="15dp"
+            android:elevation="10dp"
+            android:fontFamily="@font/ubuntu_regular"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/forgot_password"
             android:textColor="#2CA7E0"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/ubuntu_medium"
             android:layout_gravity="end"
             android:layout_marginTop="20dp"
             android:textSize="15sp"
             android:layout_marginRight="35dp"
             android:id="@+id/forgot_pass_id"
-            android:elevation="5dp"/>
+            android:elevation="5dp"
+            />
 
         <Button
             android:layout_width="300dp"
@@ -87,14 +90,16 @@
             android:layout_marginTop="20dp"
             android:id="@+id/btn_login_id"
             android:background="@drawable/button"
-            android:elevation="10dp"/>
+            android:elevation="10dp"
+            android:padding="@dimen/_15sdp"
+            android:fontFamily="@font/ubuntu_bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/register"
             android:textColor="#2CA7E0"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/ubuntu_bold"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:textSize="18sp"
@@ -102,16 +107,7 @@
             android:id="@+id/txt_reglayout_id"
             />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="55dp"
-            android:text="@string/classy_inc"
-            android:gravity="center"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="#2CA7E0"
-            android:textStyle="bold"
-            />
+
 
     </LinearLayout>
 

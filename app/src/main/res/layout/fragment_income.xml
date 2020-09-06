@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFF1F3FC"
     android:orientation="vertical"
-    tools:context=".IncomeFragment">
+    tools:context=".fragments.IncomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.cardview.widget.CardView
@@ -31,6 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/your_total_income"
+                    android:fontFamily="@font/ubuntu_medium"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@android:color/black" />
 
@@ -49,6 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$ 0000.00"
+                    android:fontFamily="@font/ubuntu_bold"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@android:color/holo_green_dark" />
 
@@ -71,6 +73,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/edit"
             android:hint="@string/search_here"
+            android:fontFamily="@font/ubuntu_regular"
             android:padding="5dp"
             android:inputType="textLongMessage"
             android:drawableLeft="@drawable/ic_search_black_24dp"

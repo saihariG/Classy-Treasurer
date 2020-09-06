@@ -32,7 +32,7 @@
     <string name="send_link">Send link</string>
     <string name="loGin">Login</string>
 
-    <string name="your_financial_tip">Your Financial Tip!</string>
+    <string name="your_financial_tip">Your Financial Tip</string>
     <string name="loading_please_wait">Loading...!please wait...</string>
     <string name="go_back_to_home">GO Back To Home</string>
     <string name="add_your_expense_details">Add Your Expense Details</string>
@@ -51,9 +51,9 @@
     <string name="_6_june_2018">6 june 2018</string>
     <string name="_4_05_pm">4:05 PM</string>
 
-    <string name="your_total_expense">Your Total Expense:</string>
+    <string name="your_total_expense">My Total Expense:</string>
     <string name="search_here">Search here...</string>
-    <string name="your_total_income">Your Total Income:</string>
+    <string name="your_total_income">My Total Income:</string>
 
 
 
@@ -73,7 +73,7 @@
 
     <string name="contact_developer">Contact developer</string>
     <string name="be_an_investor">Be an Investor</string>
-    <string name="get_financial_tip_as_reward">Get Financial Tip as Reward</string>
+    <string name="get_financial_tip_as_reward">View Ad to receive Tip</string>
     <string name="expense">Expense</string>
     <string name="income">Income</string>
     <string name="dashboard">DashBoard</string>

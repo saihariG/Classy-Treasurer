@@ -21,10 +21,6 @@
         android:icon="@drawable/financialtip"
         android:title="@string/get_financial_tip_as_reward" />
 
-    <item
-        android:id="@+id/investor"
-        android:icon="@drawable/invest"
-        android:title="@string/be_an_investor" />
 
     <item
         android:id="@+id/developer_info"

@@ -16,7 +16,8 @@
             android:id="@+id/my_toolbar"
             android:background="@color/colorPrimary"
             app:titleTextColor="@android:color/white"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:theme="@style/ToolbarTheme">
 
 
 

@@ -1,4 +1,4 @@
-package com.classyinc.classytreasurer;
+package com.classyinc.classytreasurer.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.classyinc.classytreasurer.R;
 
 import java.util.ArrayList;
 
@@ -37,7 +39,7 @@ public class SearchexpenseAdapter extends RecyclerView.Adapter<SearchexpenseAdap
         }
     }
 
-    SearchexpenseAdapter(Context context, ArrayList<String> mdateList, ArrayList<String> mtimeList, ArrayList<String> mtitleList, ArrayList<String> mnoteList, ArrayList<String> mamountList) {
+    public SearchexpenseAdapter(Context context, ArrayList<String> mdateList, ArrayList<String> mtimeList, ArrayList<String> mtitleList, ArrayList<String> mnoteList, ArrayList<String> mamountList) {
         this.context = context;
 
         this.mdateList = mdateList;

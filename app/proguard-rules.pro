@@ -19,26 +19,25 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
--keep class com.example.classytreasurer.Model.** {*;}
--keep class com.example.classytreasurer.confg.** {*;}
--keep class com.example.classytreasurer.Utils.** {*;}
+-keep class com.classyinc.classytreasurer.Model.** {*;}
+-keep class com.classyinc.classytreasurer.confg.** {*;}
+-keep class com.classyinc.classytreasurer.Utils.** {*;}
 
--keep class com.example.classytreasurer.** {*;}
+-keep class com.classyinc.classytreasurer.** {*;}
 
--keep class com.classyinc.classytreasurer.SearchAdapter {*;}
--keep class com.classyinc.classytreasurer.SearchexpenseAdapter {*;}
--keep class com.classyinc.classytreasurer.RewardActivity {*;}
--keep class com.classyinc.classytreasurer.ResetActivity {*;}
--keep class com.classyinc.classytreasurer.RequestFeature {*;}
--keep class com.classyinc.classytreasurer.RegistrationActivity {*;}
--keep class com.classyinc.classytreasurer.PaymentDetails {*;}
--keep class com.classyinc.classytreasurer.PayActivity {*;}
--keep class com.classyinc.classytreasurer.MainActivity {*;}
--keep class com.classyinc.classytreasurer.IncomeFragment {*;}
--keep class com.classyinc.classytreasurer.HomeActivity {*;}
--keep class com.classyinc.classytreasurer.ExpenseFragment {*;}
--keep class com.classyinc.classytreasurer.Developer {*;}
--keep class com.classyinc.classytreasurer.DashBoardFragment {*;}
+-keep class com.classyinc.classytreasurer.adapters.SearchAdapter {*;}
+-keep class com.classyinc.classytreasurer.adapters.SearchexpenseAdapter {*;}
+-keep class com.classyinc.classytreasurer.activities.RewardActivity {*;}
+-keep class com.classyinc.classytreasurer.activities.ResetActivity {*;}
+-keep class com.classyinc.classytreasurer.activities.RequestFeature {*;}
+-keep class com.classyinc.classytreasurer.activities.RegistrationActivity {*;}
+
+-keep class com.classyinc.classytreasurer.activities.MainActivity {*;}
+-keep class com.classyinc.classytreasurer.fragments.IncomeFragment {*;}
+-keep class com.classyinc.classytreasurer.activities.HomeActivity {*;}
+-keep class com.classyinc.classytreasurer.fragments.ExpenseFragment {*;}
+-keep class com.classyinc.classytreasurer.activities.Developer {*;}
+-keep class com.classyinc.classytreasurer.fragments.DashBoardFragment {*;}
 
 -keep class *{
       public private *;

@@ -20,6 +20,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="$ Amount"
+            android:fontFamily="@font/ubuntu_bold"
             android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@android:color/holo_green_dark" />
 
@@ -31,6 +32,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/type"
+            android:fontFamily="@font/ubuntu_medium"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/colorPrimary" />
 
@@ -42,6 +44,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/_19_nov_2019"
+            android:fontFamily="@font/ubuntu_regular"
             android:textAppearance="?android:textAppearanceSmall"
             android:textColor="@color/date_color" />
 

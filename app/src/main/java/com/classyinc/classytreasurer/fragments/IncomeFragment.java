@@ -1,16 +1,8 @@
-package com.classyinc.classytreasurer;
+package com.classyinc.classytreasurer.fragments;
 
 import android.app.AlertDialog;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -24,13 +16,20 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.classyinc.classytreasurer.Model.Data;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.classyinc.classytreasurer.Model.Data;
+import com.classyinc.classytreasurer.R;
+import com.classyinc.classytreasurer.adapters.SearchAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
-
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.formats.MediaView;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
@@ -49,21 +48,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
+import static com.classyinc.classytreasurer.R.*;
+import static java.lang.Integer.*;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ExpenseFragment extends Fragment {
+public class IncomeFragment extends Fragment {
 
-    private DatabaseReference mExpenseDatabase;
-
+    private DatabaseReference mIncomeDatabase;
     //recyclerview...
     private RecyclerView recyclerView;
 
     //Text view
-    private TextView expenseTotalSum;
+    private TextView incomeTotalSum;
 
-    //edt data item
+    //UPDATE edttext...
     private EditText edtAmount;
     private EditText edtType;
     private EditText edtNote;
@@ -76,27 +77,24 @@ public class ExpenseFragment extends Fragment {
     private String post_key;
 
 
-    FirebaseUser firebaseUser;
-
-
     ArrayList<String> mamountList;
     ArrayList<String> mdateList;
     ArrayList<String> mnoteList;
     ArrayList<String> mtitleList;
     ArrayList<String> mtimeList;
 
-    private SearchexpenseAdapter searchexpenseAdapter;
-
+    private FirebaseUser firebaseUser;
+    private SearchAdapter searchAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View myview = inflater.inflate(R.layout.fragment_expense, container, false);
+        final View myview =  inflater.inflate(layout.fragment_income, container, false);
 
-        EditText search_edt_txt = myview.findViewById(R.id.search_expense_edt_txt);
-        mExpenseDatabase = FirebaseDatabase.getInstance().getReference("ExpenseData");
+        EditText search_edt_txt = myview.findViewById(R.id.search_edt_txt);
+        mIncomeDatabase = FirebaseDatabase.getInstance().getReference("IncomeData");
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         mamountList = new ArrayList<>();
@@ -118,33 +116,34 @@ public class ExpenseFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(!s.toString().isEmpty()) {
-                    setAdapter(s.toString());
-                }
-                /*else {
-                    mdateList.clear();
+                 if(!s.toString().isEmpty()) {
+                     setAdapter(s.toString());
+                 }
+                 /*else {
+                     mdateList.clear();
 
-                    mtimeList.clear();
-                    mtitleList.clear();
-                    mnoteList.clear();
-                    mamountList.clear();
-                    recyclerView.removeAllViews();
-                }*/
+                     mtimeList.clear();
+                     mtitleList.clear();
+                     mnoteList.clear();
+                     mamountList.clear();
+
+                     recyclerView.removeAllViews();
+                 } */
             }
         });
 
 
         MobileAds.initialize(getActivity());
-        AdLoader adLoader =new AdLoader.Builder(Objects.requireNonNull(getActivity()),"ca-app-pub-6826247666109501/1489960584")
+        AdLoader adLoader =new AdLoader.Builder(Objects.requireNonNull(getActivity()),"ca-app-pub-4710955483788759/9500767760")
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
                     public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                        UnifiedNativeAdView unifiedNativeAdView = (UnifiedNativeAdView) getLayoutInflater().inflate(R.layout.native_layout,null);
+                        UnifiedNativeAdView unifiedNativeAdView = (UnifiedNativeAdView) getLayoutInflater().inflate(layout.native_layout,null);
                         mapUnifiedNativeAdToLayout(unifiedNativeAd,unifiedNativeAdView);
 
                         //FrameLayout nativeAdLayout = new FrameLayout(Objects.requireNonNull(getActivity()));
 
-                        FrameLayout nativeAdLayout = myview.findViewById(R.id.frame_id);
+                        FrameLayout nativeAdLayout = myview.findViewById(id.frame_income_id);
                         nativeAdLayout.removeAllViews();
                         nativeAdLayout.addView(unifiedNativeAdView);
                     }
@@ -154,42 +153,43 @@ public class ExpenseFragment extends Fragment {
                     @Override
                     public void onAdFailedToLoad(int errorCode) {
                         super.onAdFailedToLoad(errorCode);
-                        if (errorCode == AdRequest.ERROR_CODE_INTERNAL_ERROR) {
-                            Toast.makeText(getActivity(), "Internal error!", Toast.LENGTH_SHORT).show();
+                       /* if (errorCode == AdRequest.ERROR_CODE_INTERNAL_ERROR) {
+                            Toast.makeText(getActivity(), errorCode, Toast.LENGTH_SHORT).show();
                         }
                         else if(errorCode == AdRequest.ERROR_CODE_INVALID_REQUEST) {
-                            Toast.makeText(getActivity(), "Invalid Ad Request!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), errorCode, Toast.LENGTH_SHORT).show();
                         }
                         else if(errorCode == AdRequest.ERROR_CODE_NETWORK_ERROR){
-                            Toast.makeText(getActivity(),"Please Check your Internet Connection!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),errorCode, Toast.LENGTH_SHORT).show();
                         }
                         else if(errorCode == AdRequest.ERROR_CODE_NO_FILL){
-                            Toast.makeText(getActivity(),"Lack of Ads in Inventory!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),errorCode, Toast.LENGTH_SHORT).show();
                         }
                         else if(errorCode == AdRequest.ERROR_CODE_APP_ID_MISSING){
-                            Toast.makeText(getActivity(),"App Id Missing!", Toast.LENGTH_SHORT).show();
-                        }
+                            Toast.makeText(getActivity(),errorCode, Toast.LENGTH_SHORT).show();
+                        } */
                     }
                 })
+
                 .build();
         adLoader.loadAd(new AdRequest.Builder().build());
 
-        mExpenseDatabase =FirebaseDatabase.getInstance().getReference("ExpenseData");
-        mExpenseDatabase.keepSynced(true);
+        recyclerView = myview.findViewById(id.recycler_id_income);
 
-        //firebase database
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),LinearLayoutManager.VERTICAL));
+
+        mIncomeDatabase=FirebaseDatabase.getInstance().getReference("IncomeData");
+        mIncomeDatabase.keepSynced(true);
+
+        //database...
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
 
         String uid = Objects.requireNonNull(mUser).getUid();
 
-        mExpenseDatabase = FirebaseDatabase.getInstance().getReference().child("ExpenseData").child(uid);
+        mIncomeDatabase = FirebaseDatabase.getInstance().getReference().child("IncomeData").child(uid);
 
-        expenseTotalSum = myview.findViewById(R.id.expense_txt_result);
-
-        recyclerView = myview.findViewById(R.id.recycler_id_expense);
-
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),LinearLayoutManager.VERTICAL));
+        incomeTotalSum = myview.findViewById(id.income_txt_result);
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -199,7 +199,8 @@ public class ExpenseFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
-        mExpenseDatabase.addValueEventListener(new ValueEventListener() {
+        mIncomeDatabase.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -209,12 +210,11 @@ public class ExpenseFragment extends Fragment {
 
                     Data data = mysnapshot.getValue(Data.class);
 
-                    assert data != null;
-                    totalvalue += data.getAmount();
+                    totalvalue += Objects.requireNonNull(data).getAmount();
 
                     String stTotalvalue = String.valueOf(totalvalue);
 
-                    expenseTotalSum.setText("$"+stTotalvalue+".00");
+                    incomeTotalSum.setText("$"+stTotalvalue+".00");
                 }
             }
 
@@ -224,25 +224,26 @@ public class ExpenseFragment extends Fragment {
             }
         });
 
-
         return myview;
     }
 
+
+
     private void setAdapter(final String searchedString) {
 
-        mExpenseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        mIncomeDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 mdateList.clear();
-
                 mtimeList.clear();
                 mtitleList.clear();
                 mnoteList.clear();
                 mamountList.clear();
                 recyclerView.removeAllViews();
-                int amount;
+
+                int amount ;
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
@@ -251,9 +252,8 @@ public class ExpenseFragment extends Fragment {
                     String note = snapshot.child("note").getValue(String.class);
                     Data data = snapshot.getValue(Data.class);
                     amount = Objects.requireNonNull(data).getAmount();
-
-                    String date = snapshot.child("date").getValue(String.class);
-                    String time = snapshot.child("time").getValue(String.class);
+                    String date = Objects.requireNonNull(snapshot.child("date").getValue(String.class));
+                    String time = Objects.requireNonNull(snapshot.child("time").getValue(String.class));
 
                     String amt =  String.valueOf("$"+amount);
 
@@ -261,56 +261,58 @@ public class ExpenseFragment extends Fragment {
 
                         mdateList.add(date);
                         mtimeList.add(time);
-
                         mtitleList.add(title);
                         mnoteList.add(note);
                         mamountList.add(amt);
 
                     }else if(Objects.requireNonNull(note).toLowerCase().contains(searchedString.toLowerCase())) {
+
                         mdateList.add(date);
                         mtimeList.add(time);
-
                         mtitleList.add(title);
                         mnoteList.add(note);
                         mamountList.add(amt);
-                    }else if (Objects.requireNonNull(amt).toLowerCase().contains(searchedString.toLowerCase())) {
+                    }else if(amt.toLowerCase().contains(searchedString.toLowerCase())) {
                         mdateList.add(date);
                         mtimeList.add(time);
-
                         mtitleList.add(title);
                         mnoteList.add(note);
                         mamountList.add(amt);
-                }else if(Objects.requireNonNull(date).toLowerCase().contains(searchedString.toLowerCase())) {
+
+
+                    }else if(date.toLowerCase().contains(searchedString.toLowerCase())) {
+
                         mdateList.add(date);
                         mtimeList.add(time);
-
                         mtitleList.add(title);
                         mnoteList.add(note);
                         mamountList.add(amt);
-                    }else if(Objects.requireNonNull(time).toLowerCase().contains(searchedString.toLowerCase())) {
+
+                    }else if (time.toLowerCase().contains(searchedString.toLowerCase())) {
+
                         mdateList.add(date);
                         mtimeList.add(time);
-
                         mtitleList.add(title);
                         mnoteList.add(note);
                         mamountList.add(amt);
 
                     }
 
-
                 }
-                searchexpenseAdapter = new SearchexpenseAdapter(getActivity(),mdateList,mtimeList,mtitleList,mnoteList,mamountList);
-                recyclerView.setAdapter(searchexpenseAdapter);
+                searchAdapter = new SearchAdapter(getActivity(),mdateList,mtimeList,mtitleList,mnoteList,mamountList);
+
+                recyclerView.setAdapter(searchAdapter);
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
-
-
     }
+
 
     private void mapUnifiedNativeAdToLayout(UnifiedNativeAd adFromGoogle, UnifiedNativeAdView myAdView) {
 
@@ -337,12 +339,12 @@ public class ExpenseFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        FirebaseRecyclerAdapter<Data,MyViewHolder> adapter=new FirebaseRecyclerAdapter<Data,MyViewHolder>
+        FirebaseRecyclerAdapter<Data,MyViewHolder>adapter=new FirebaseRecyclerAdapter<Data, MyViewHolder>
                 (
                         Data.class,
-                        R.layout.expense_recycler_data,
+                        layout.income_recycler_data,
                         MyViewHolder.class,
-                        mExpenseDatabase
+                        mIncomeDatabase
                 ) {
             @Override
             protected void populateViewHolder(MyViewHolder myViewHolder, final Data model,final int position) {
@@ -352,7 +354,6 @@ public class ExpenseFragment extends Fragment {
                 myViewHolder.setDate(model.getDate());
                 myViewHolder.setTime(model.getTime());
                 myViewHolder.setAmount(model.getAmount());
-
 
                 myViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -374,40 +375,44 @@ public class ExpenseFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
-    public  static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder  {
 
         View mView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             mView=itemView;
-        }
 
-        private void setDate(String date) {
-            TextView mDate = mView.findViewById(R.id.date_txt_expense_id);
-            mDate.setText(date);
 
         }
 
-        private void setType(String type) {
-            TextView mType = mView.findViewById(R.id.type_txt_expense_id);
+
+        void setType(String type) {
+
+            TextView mType = mView.findViewById(id.type_txt_income_id);
             mType.setText(type);
         }
 
-        private void setNote(String note) {
-            TextView mNote = mView.findViewById(R.id.note_txt_expense_id);
+        public void setNote(String note) {
+            TextView mNote = mView.findViewById(id.note_txt_income_id);
             mNote.setText(note);
 
         }
 
-        private void setTime(String time) {
-            TextView mTime = mView.findViewById(R.id.time_txt_expense_id);
+        void setDate(String date) {
+            TextView mDate = mView.findViewById(id.date_txt_income_id);
+            mDate.setText(date);
+
+        }
+
+        void setTime(String time) {
+            TextView mTime = mView.findViewById(id.time_txt_income_id);
             mTime.setText(time);
 
         }
 
-        private void setAmount(int amnt) {
-            TextView mAmount = mView.findViewById(R.id.amoount_txt_expense_id);
+        void setAmount(int amnt) {
+            TextView mAmount = mView.findViewById(id.amoount_txt_income_id);
             String stamount = String.valueOf(amnt);
             mAmount.setText("$"+stamount);
 
@@ -422,15 +427,16 @@ public class ExpenseFragment extends Fragment {
 
         LayoutInflater inflater = LayoutInflater.from(getActivity());
 
-        View myview = inflater.inflate(R.layout.update_expense_data_item,null);
+        View myview = inflater.inflate(layout.update_data_item,null);
 
         mydialog.setView(myview);
 
 
-        edtAmount = myview.findViewById(R.id.edt_amount_update_expense_id);
-        edtNote = myview.findViewById(R.id.edt_note_update_expense_id);
-        edtType = myview.findViewById(R.id.edt_type_update_expense_id);
+        edtAmount = myview.findViewById(id.edt_amount_id);
+        edtNote = myview.findViewById(id.edt_note_id);
+        edtType = myview.findViewById(id.edt_type_id);
 
+        //set data to edittext
         edtType.setText(type);
         edtType.setSelection(type.length());
 
@@ -440,14 +446,16 @@ public class ExpenseFragment extends Fragment {
         edtAmount.setText(String.valueOf(amount));
         edtAmount.setSelection(String.valueOf(amount).length());
 
-        Button btnUpdate = myview.findViewById(R.id.btn_UPDATE_update_expense_id);
-        Button btnDelete = myview.findViewById(R.id.btn_DELETE_update_expense_id);
+        //button for upd & del
+        Button btnUpdate = myview.findViewById(id.btn_UPDATE_id);
+        Button btnDelete = myview.findViewById(id.btn_DELETE_id);
 
         final AlertDialog dialog = mydialog.create();
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 type = edtType.getText().toString().trim();
                 note = edtNote.getText().toString().trim();
 
@@ -455,7 +463,7 @@ public class ExpenseFragment extends Fragment {
 
                 mdamount = edtAmount.getText().toString().trim();
 
-                int myAmount = Integer.parseInt(mdamount);
+                int myAmount = parseInt(mdamount);
 
                 if(TextUtils.isEmpty(mdamount)) {
                     edtAmount.setError("Field Empty!");
@@ -473,25 +481,28 @@ public class ExpenseFragment extends Fragment {
 
                 String mDate = DateFormat.getDateInstance().format(new Date());
 
+                //String stringDate = DateFormat.getDateTimeInstance().format(mDate);
+                //DateFormat.getTimeInstance();
+
                 String time =DateFormat.getTimeInstance().format(new Date());
 
                 Data data = new Data(myAmount,type,note,post_key,mDate,time);
-                mExpenseDatabase.child(post_key).setValue(data);
+                mIncomeDatabase.child(post_key).setValue(data);
 
                 dialog.dismiss();
+
             }
         });
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                mExpenseDatabase.child(post_key).removeValue();
+                mIncomeDatabase.child(post_key).removeValue();
                 dialog.dismiss();
-
             }
         });
 
         dialog.show();
+
     }
 }

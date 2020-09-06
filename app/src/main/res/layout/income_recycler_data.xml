@@ -26,7 +26,8 @@
                 android:text="@string/_6_june_2018"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/date_color"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/ubuntu_medium"/>
 
             <TextView
                 android:id="@+id/time_txt_income_id"
@@ -34,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/date_txt_income_id"
                 android:text="@string/_4_05_pm"
-
+                android:fontFamily="@font/ubuntu_regular"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textColor="@android:color/black" />
 
@@ -54,7 +55,8 @@
                 android:text="@string/type"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/ubuntu_bold"/>
 
             <TextView
                 android:id="@+id/note_txt_income_id"
@@ -64,7 +66,8 @@
                 android:maxLines="1"
                 android:text="Note"
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/ubuntu_regular"/>
 
         </RelativeLayout>
 
@@ -78,6 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="$ 15,000"
+                android:fontFamily="@font/ubuntu_bold"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textColor="@android:color/holo_green_dark"
                 android:textStyle="bold" />

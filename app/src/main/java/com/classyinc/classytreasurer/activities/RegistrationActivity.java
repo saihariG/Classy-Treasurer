@@ -1,4 +1,4 @@
-package com.classyinc.classytreasurer;
+package com.classyinc.classytreasurer.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.classyinc.classytreasurer.Model.User;
 
+import com.classyinc.classytreasurer.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -67,16 +68,16 @@ public  class RegistrationActivity extends AppCompatActivity {
                 String pass = mPass.getText().toString().trim();
 
                 if(TextUtils.isEmpty(email)) {
-                    mEmail.setError("Email Required...!");
+                    mEmail.setError("Email Required");
                     return;
                 }
 
                 if(TextUtils.isEmpty(pass)) {
-                    mPass.setError("Set a Password...!");
+                    mPass.setError("Set a Password");
                     return;
                 }
 
-                mDialog.setMessage("Processing...!");
+                mDialog.setMessage("Processing");
                 mDialog.show();
 
                 mAuth.createUserWithEmailAndPassword(email,pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -93,7 +94,8 @@ public  class RegistrationActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(getApplicationContext(),"registered succcessfully!",Toast.LENGTH_LONG).show();
+
+                                        Toast.makeText(getApplicationContext(),"registered succcessfully",Toast.LENGTH_LONG).show();
                                         startActivity(new Intent(getApplicationContext(),HomeActivity.class));
                                         mDialog.dismiss();
                                     }

@@ -1,4 +1,4 @@
-package com.classyinc.classytreasurer;
+package com.classyinc.classytreasurer.fragments;
 
 
 import android.os.Build;
@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.classyinc.classytreasurer.Model.Data;
+import com.classyinc.classytreasurer.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -80,8 +81,6 @@ public class DashBoardFragment extends Fragment {
 
     private boolean adLoaded = false;
 
-
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,7 +89,7 @@ public class DashBoardFragment extends Fragment {
         View myview = inflater.inflate(R.layout.fragment_dash_board, container, false);
 
 
-        MobileAds.initialize(getActivity(), "ca-app-pub-6826247666109501~7454811121");
+        MobileAds.initialize(getActivity(), "ca-app-pub-4710955483788759~6292166403");
         final AdView incometxtBannerAD = myview.findViewById(R.id.income_banner_id);
         final AdView expensetxtBannerAd = myview.findViewById(R.id.expense_banner_id);
 
@@ -106,21 +105,21 @@ public class DashBoardFragment extends Fragment {
             @Override
             public void onAdFailedToLoad(int errorCode) {
                 adLoaded = false;
-                if (errorCode == AdRequest.ERROR_CODE_INTERNAL_ERROR) {
-                    Toast.makeText(getActivity(), "Internal error!", Toast.LENGTH_SHORT).show();
+              /*  if (errorCode == AdRequest.ERROR_CODE_INTERNAL_ERROR) {
+                    Toast.makeText(getActivity(), errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_INVALID_REQUEST) {
-                    Toast.makeText(getActivity(), "Invalid Ad Request!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_NETWORK_ERROR){
-                    Toast.makeText(getActivity(),"Please Check your Internet Connection!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_NO_FILL){
-                    Toast.makeText(getActivity(),"Lack of Ads in Inventory!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_APP_ID_MISSING){
-                    Toast.makeText(getActivity(),"App Id Missing!", Toast.LENGTH_SHORT).show();
-                }
+                    Toast.makeText(getActivity(),errorCode, Toast.LENGTH_SHORT).show();
+                } */
 
             }
 
@@ -133,11 +132,11 @@ public class DashBoardFragment extends Fragment {
             }
             public void onAdFailedToLoad(int errorCode){
                 adLoaded = false;
-                if (errorCode == AdRequest.ERROR_CODE_INTERNAL_ERROR) {
-                    Toast.makeText(getActivity(), "Internal error!", Toast.LENGTH_SHORT).show();
+            /*    if (errorCode == AdRequest.ERROR_CODE_INTERNAL_ERROR) {
+                    Toast.makeText(getActivity(), errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_INVALID_REQUEST) {
-                    Toast.makeText(getActivity(), "Invalid Ad Request!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_NETWORK_ERROR){
                     Toast.makeText(getActivity(), errorCode, Toast.LENGTH_SHORT).show();
@@ -147,7 +146,7 @@ public class DashBoardFragment extends Fragment {
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_APP_ID_MISSING){
                     Toast.makeText(getActivity(), errorCode, Toast.LENGTH_SHORT).show();
-                }
+                } */
             }
 
         });
@@ -370,19 +369,19 @@ public class DashBoardFragment extends Fragment {
                 String note = edtNote.getText().toString().trim();
 
                 if(TextUtils.isEmpty(type)) {
-                    edttype.setError("Field Empty...!");
+                    edttype.setError("Field Empty");
                     return;
                 }
 
                 if(TextUtils.isEmpty(amount)) {
-                    edtAmount.setError("Field Empty...!");
+                    edtAmount.setError("Field Empty");
                     return;
                 }
 
                 int ouramountint = Integer.parseInt(amount);
 
                 if(TextUtils.isEmpty(note)) {
-                    edtNote.setError("Field Empty...!");
+                    edtNote.setError("Field Empty");
                     //return;
                 }
 
@@ -394,7 +393,7 @@ public class DashBoardFragment extends Fragment {
                 Data data = new Data(ouramountint,type,note,id,mDate,time);
 
                 mIncomeDatabase.child(Objects.requireNonNull(id)).setValue(data);
-                Toast.makeText(getActivity(), "Income Data added...!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Income Data added", Toast.LENGTH_SHORT).show();
 
                 ftAnimation();
                 dialog.dismiss();
@@ -436,19 +435,19 @@ public class DashBoardFragment extends Fragment {
                 String tmnote = note.getText().toString().trim();
 
                 if(TextUtils.isEmpty(tmtype)) {
-                    type.setError("Field Empty...!");
+                    type.setError("Field Empty");
                     return;
                 }
 
                 if(TextUtils.isEmpty(tmamount)) {
-                    amount.setError("Field Empty...!");
+                    amount.setError("Field Empty");
                     return;
                 }
 
                 int inamount = Integer.parseInt(tmamount);
 
                 if(TextUtils.isEmpty(tmnote)) {
-                    note.setError("Field Empty...!");
+                    note.setError("Field Empty");
                    // return;
                 }
 
@@ -463,7 +462,7 @@ public class DashBoardFragment extends Fragment {
                 Data data = new Data(inamount,tmtype,tmnote,id,mDate,time);
 
                 mExpenseDatabase.child(Objects.requireNonNull(id)).setValue(data);
-                Toast.makeText(getActivity(), "Expense Data added...!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Expense Data added", Toast.LENGTH_SHORT).show();
 
                 ftAnimation();
                 dialog.dismiss();

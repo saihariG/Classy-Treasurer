@@ -18,7 +18,6 @@ public class Data {
         this.time = time;
     }
 
-
     public int getAmount() {
         return amount;
     }

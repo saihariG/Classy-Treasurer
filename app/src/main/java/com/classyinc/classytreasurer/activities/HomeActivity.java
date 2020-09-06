@@ -1,4 +1,4 @@
-package com.classyinc.classytreasurer;
+package com.classyinc.classytreasurer.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
+//import androidx.fragment.app.Fragment;
 
-import androidx.fragment.app.FragmentTransaction;
+//import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Build;
@@ -19,9 +19,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-
 import android.widget.TextView;
 
+import com.classyinc.classytreasurer.fragments.DashBoardFragment;
+import com.classyinc.classytreasurer.fragments.ExpenseFragment;
+import com.classyinc.classytreasurer.fragments.IncomeFragment;
+import com.classyinc.classytreasurer.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +40,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
 
     private FirebaseAuth mAuth;
     DatabaseReference usermail;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -86,6 +90,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
 
         Fragment frag = new DashBoardFragment();
         getSupportFragmentManager().beginTransaction()
+
                 .replace(R.id.mainframe, frag)
                 .commit();
 
@@ -98,6 +103,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
 
                         Fragment frag = new DashBoardFragment();
                         getSupportFragmentManager().beginTransaction()
+
                                 .add(new ExpenseFragment(), "ExpenseFragment")
                                 .replace(R.id.mainframe, frag)
                                 .addToBackStack("ExpenseFragment")
@@ -109,11 +115,13 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
                     case R.id.income:
 
                         Fragment frag1 = new IncomeFragment();
-                        getSupportFragmentManager().beginTransaction()
-                                .add(new DashBoardFragment(), "DashBoardFragment")
-                                .replace(R.id.mainframe, frag1)
-                                .addToBackStack("DashBoardFragment")
-                                .commit();
+
+                            getSupportFragmentManager().beginTransaction()
+
+                                    .add(new DashBoardFragment(), "DashBoardFragment")
+                                    .replace(R.id.mainframe, frag1)
+                                    .addToBackStack("DashBoardFragment")
+                                    .commit() ;
 
                         bottomNavigationView.setItemBackgroundResource(R.color.incomefragment);
                         return true;
@@ -122,6 +130,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
 
                         Fragment frag2 = new ExpenseFragment();
                         getSupportFragmentManager().beginTransaction()
+
                                 .replace(R.id.mainframe, frag2)
                                 .add(new IncomeFragment(), "IncomeFragment")
                                 .addToBackStack("IncomeFragment")
@@ -135,9 +144,6 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
             }
         });
     }
-
-
-
 
 
     @Override
@@ -190,26 +196,25 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
 
             case R.id.FinancialTip:
                 startActivity(new Intent(getApplicationContext(),RewardActivity.class));
-                break;
-
-            case R.id.investor:
-
-                startActivity(new Intent(getApplicationContext(),PayActivity.class));
+                overridePendingTransition(R.anim.fui_slide_in_right,R.anim.fui_slide_out_left);
                 break;
 
             case R.id.developer_info:
 
-                startActivity(new Intent(getApplicationContext(),Developer.class));
+                startActivity(new Intent(getApplicationContext(), Developer.class));
+                overridePendingTransition(R.anim.fui_slide_in_right,R.anim.fui_slide_out_left);
                 break;
 
             case R.id.request:
 
                 startActivity(new Intent(getApplicationContext(),RequestFeature.class));
+                overridePendingTransition(R.anim.fui_slide_in_right,R.anim.fui_slide_out_left);
                 break;
 
             case R.id.logout_id:
                 mAuth.signOut();
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                overridePendingTransition(R.anim.fui_slide_in_right,R.anim.fui_slide_out_left);
                 break;
         }
 
@@ -223,8 +228,6 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
     }
-
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

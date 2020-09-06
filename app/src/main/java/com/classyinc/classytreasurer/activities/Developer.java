@@ -1,13 +1,15 @@
-package com.classyinc.classytreasurer;
+package com.classyinc.classytreasurer.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.classyinc.classytreasurer.R;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -18,14 +20,18 @@ import java.util.Calendar;
 import mehdi.sakout.aboutpage.AboutPage;
 import mehdi.sakout.aboutpage.Element;
 
+
+
 public class Developer extends AppCompatActivity {
+
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Element adsElement = new Element();
-        adsElement.setTitle("Version 1.0");
+        adsElement.setTitle("Version 2.1");
 
         Element bio = new Element();
         bio.setTitle("I like Music, Cricket n Coding!");
@@ -47,14 +53,12 @@ public class Developer extends AppCompatActivity {
         bio2.setIcon(R.drawable.star);
         bio2.setColor(R.color.colorPrimary);
 
-
-
         Element subbio2 = new Element();
         subbio2.setTitle("Don't hesitate to Contact mE!");
 
-        String des = "Hey ! Yeah its me ! Sai Hari\nI am currently pursuing my UG at SVCE specialised in CS";
+        String des = "Hey ! I am Sai Hari\nI am currently pursuing my UG at SVCE specialised in CS";
 
-        View aboutpage = new AboutPage(this)
+        View aboutpage = new AboutPage(context)
                 .isRTL(false)
                 .setImage(R.drawable.profile)
                 .setDescription(des)
@@ -80,10 +84,10 @@ public class Developer extends AppCompatActivity {
                 .create();
 
         setContentView(aboutpage);
-        MobileAds.initialize(Developer.this,"ca-app-pub-6826247666109501~7454811121");
+        MobileAds.initialize(context,"ca-app-pub-4710955483788759~6292166403");
 
-        final InterstitialAd interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId("ca-app-pub-6826247666109501/7893246085");
+        final InterstitialAd interstitialAd = new InterstitialAd(context);
+        interstitialAd.setAdUnitId("ca-app-pub-4710955483788759/7244664731");
         interstitialAd.loadAd(new AdRequest.Builder().build());
 
         interstitialAd.setAdListener(new AdListener(){
@@ -93,22 +97,22 @@ public class Developer extends AppCompatActivity {
                     interstitialAd.show();
                 }
             }
-            @Override
+            /*@Override
             public void onAdFailedToLoad(int errorCode){
                 if (errorCode == AdRequest.ERROR_CODE_INTERNAL_ERROR) {
-                    Toast.makeText(Developer.this, "Internal error!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Developer.this, errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_INVALID_REQUEST) {
-                    Toast.makeText(Developer.this, "Invalid Ad Request!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Developer.this, errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_NETWORK_ERROR){
-                    Toast.makeText(Developer.this, "Please check your Internet Connection!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Developer.this, errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_NO_FILL){
-                    Toast.makeText(Developer.this,"Lack of Ads in Inventory!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Developer.this,errorCode, Toast.LENGTH_SHORT).show();
                 }
                 else if(errorCode == AdRequest.ERROR_CODE_APP_ID_MISSING){
-                    Toast.makeText(Developer.this,"App Id Missing!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Developer.this,errorCode, Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -118,8 +122,7 @@ public class Developer extends AppCompatActivity {
             @Override
             public void onAdClosed() {
 
-
-            }
+            } */
 
         });
     }
@@ -134,7 +137,7 @@ public class Developer extends AppCompatActivity {
         copyright.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Developer.this, copyrightstring, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context , copyrightstring, Toast.LENGTH_SHORT).show();
             }
         });
         return copyright;
@@ -142,6 +145,8 @@ public class Developer extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+        startActivity(new Intent(context, HomeActivity.class));
+        overridePendingTransition(R.anim.fui_slide_in_right,R.anim.fui_slide_out_left);
     }
+
 }

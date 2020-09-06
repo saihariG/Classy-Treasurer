@@ -1,10 +1,13 @@
-package com.classyinc.classytreasurer;
+package com.classyinc.classytreasurer.activities;
 
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.classyinc.classytreasurer.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 
@@ -20,6 +24,7 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class RewardActivity extends AppCompatActivity  implements RewardedVideoAdListener {
@@ -28,7 +33,6 @@ public class RewardActivity extends AppCompatActivity  implements RewardedVideoA
     private RewardedVideoAd mRewardedVideoAd;
     private TextView textReward;
 
-    Button btn;
 
     private String[] tips = {"Always inculcate saving habits in your children:\n" +
             "\n" +
@@ -193,40 +197,55 @@ public class RewardActivity extends AppCompatActivity  implements RewardedVideoA
     "Do n’t start EMIs unnecessarily, otherwise, you have to pay a lot of interest in the long term.",
     "Do n’t buy too many clothes and other unnecessary kinds of stuff, try to live a simple meaningful life. Remember your choices will lead you to become wealthy in your 30s or 40s."};
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reward);
-        MobileAds.initialize(RewardActivity.this,"ca-app-pub-6826247666109501~7454811121");
+
+        Toolbar toolbar = findViewById(R.id.tool_id);
+        toolbar.setTitle("Your Financial Tip");
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+
+        MobileAds.initialize(RewardActivity.this,"ca-app-pub-4710955483788759~6292166403");
 
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         mRewardedVideoAd.setRewardedVideoAdListener(this);
 
         loadRewardedVideoAd();
 
-
         textReward = findViewById(R.id.txt_reward_id);
-        btn=findViewById(R.id.btn_reward_id);
 
-        Toast.makeText(this, "Your Tip will take time to load!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Your Tip will take time to load", Toast.LENGTH_SHORT).show();
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-            }
-        });
+    }
 
+    @Override
+    public void finish() {
+
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+
+        finish();
+        return true;
     }
 
     @Override
     public void onBackPressed() {
         startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+        overridePendingTransition(R.anim.fui_slide_in_right,R.anim.fui_slide_out_left);
+
     }
 
     private void loadRewardedVideoAd() {
 
-        mRewardedVideoAd.loadAd("ca-app-pub-6826247666109501/4445504400",new AdRequest.Builder().build());
+        mRewardedVideoAd.loadAd("ca-app-pub-4710955483788759/4404369662",new AdRequest.Builder().build());
     }
 
     @Override
@@ -248,13 +267,13 @@ public class RewardActivity extends AppCompatActivity  implements RewardedVideoA
     @Override
     public void onRewardedVideoStarted() {
 
-        Toast.makeText(this, "Your Tip Will Be Displayed After the Ad Ends!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Your Tip Will Be Displayed After the Ad Ends", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRewardedVideoAdClosed() {
 
-        Toast.makeText(this, "Ad Closed...!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Ad Closed", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -273,26 +292,27 @@ public class RewardActivity extends AppCompatActivity  implements RewardedVideoA
     @Override
     public void onRewardedVideoAdFailedToLoad(int errorCode) {
         startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+        Toast.makeText(this, "Ad failed to load", Toast.LENGTH_SHORT).show();
         if (errorCode == AdRequest.ERROR_CODE_INTERNAL_ERROR) {
-            Toast.makeText(RewardActivity.this, "Internal error!", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(RewardActivity.this, errorCode, Toast.LENGTH_SHORT).show();
         }
         else if(errorCode == AdRequest.ERROR_CODE_INVALID_REQUEST) {
-            Toast.makeText(RewardActivity.this, "Invalid Ad Request!", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(RewardActivity.this, errorCode, Toast.LENGTH_SHORT).show();
         }
         else if(errorCode == AdRequest.ERROR_CODE_NETWORK_ERROR){
-            Toast.makeText(RewardActivity.this,"Please Check your Internet Connection!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RewardActivity.this,"No Internet", Toast.LENGTH_SHORT).show();
         }
         else if(errorCode == AdRequest.ERROR_CODE_NO_FILL){
-            Toast.makeText(RewardActivity.this,"Lack of Ads in Inventory!", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(RewardActivity.this,errorCode, Toast.LENGTH_SHORT).show();
         }
         else if(errorCode == AdRequest.ERROR_CODE_APP_ID_MISSING){
-            Toast.makeText(RewardActivity.this, "App Id Missing!", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(RewardActivity.this, errorCode, Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onRewardedVideoCompleted() {
-        Toast.makeText(getApplicationContext(), "Your Tip is Here!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Your Tip is Here", Toast.LENGTH_SHORT).show();
     }
 
 }
